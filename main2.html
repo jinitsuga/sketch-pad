@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sketch Pood</title>
+  </head>
+  <body>
+    <div id="deleteBtn">
+      <button id="delete">Clear</button>
+    </div>
+    <div id="row-container"></div>
+    <div id="container"></div>
+    <script>
+      // TESTING DIFFERENT JS ROUTE FOR THE GRID FIELD
+
+      const rowContainer = document.querySelector("#row-container");
+      const deleteBtn = document.querySelector("#deleteBtn");
+      function makeSquares(squares) {
+        for (i = 0; i < squares; i++) {
+          const rows = document.createElement("div");
+          rowContainer.appendChild(rows);
+          rows.classList.add("rows");
+          for (j = 0; j < squares; j++) {
+            const square = document.createElement("div");
+            rows.appendChild(square);
+            square.classList.add("squares");
+            square.addEventListener("mouseover", function () {
+              square.classList.add("mouseover");
+            });
+          }
+        }
+
+        rowContainer.style.height = rowContainer.offsetWidth + "px";
+      }
+      window.addEventListener("resize", function () {
+        rowContainer.style.height = rowContainer.offsetWidth + "px";
+        console.log("lol");
+      });
+
+      deleteBtn.addEventListener("click", function () {
+        while (rowContainer.firstChild) {
+          rowContainer.removeChild(rowContainer.firstChild);
+        }
+        const askSquares = Number(
+          window.prompt("How many squares per side?", "")
+        );
+        if (askSquares > 64) {
+          alert("Please use a number below 65");
+        } else makeSquares(askSquares);
+      });
+    </script>
+  </body>
+</html>
